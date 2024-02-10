@@ -1,0 +1,38 @@
+{
+  "name": "embla-carousel-angular",
+  "version": "14.0.0",
+  "description": "Angular wrapper for Embla Carousel",
+  "author": "Donald Mok <mzhlovefama@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donaldxdonald/embla-carousel-angular"
+  },
+  "bugs": {
+    "url": "https://github.com/donaldxdonald/embla-carousel-angular/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "slider",
+    "carousel",
+    "slideshow",
+    "gallery",
+    "lightweight",
+    "touch",
+    "javascript",
+    "typescript",
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "angular"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "embla-carousel": "^8.0.0-rc22",
+    "embla-carousel-reactive-utils": "^8.0.0-rc22",
+    "tslib": "^2.3.0"
+  }
+}

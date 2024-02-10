@@ -1,0 +1,41 @@
+
+.embla__button {
+  -webkit-appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.embla__buttons {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1.6rem;
+}
+
+.embla__button {
+  z-index: 1;
+  color: rgb(249, 249, 249);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 4rem;
+  height: 4rem;
+}
+
+.embla__button:disabled {
+  opacity: 0.3;
+}
+
+.embla__button__svg {
+  width: 65%;
+  height: 65%;
+}

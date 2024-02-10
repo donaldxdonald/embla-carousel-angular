@@ -77,23 +77,29 @@
           "options": {
             "browserTarget": "embla-carousel-angular-monorepo:build"
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        }
+      }
+    },
+    "embla-carousel-angular": {
+      "projectType": "library",
+      "root": "projects/embla-carousel-angular",
+      "sourceRoot": "projects/embla-carousel-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
-          }
+            "project": "projects/embla-carousel-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/embla-carousel-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/embla-carousel-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

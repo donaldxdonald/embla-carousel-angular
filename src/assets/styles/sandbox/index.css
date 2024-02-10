@@ -1,0 +1,32 @@
+
+.sandbox {
+  width: 100%;
+}
+
+.sandbox__carousel {
+  --color-detail-low-contrast: rgb(240, 240, 242);
+  position: relative;
+  background-color: rgb(244, 244, 244);
+}
+
+@media screen and (min-width: 750px) {
+  .sandbox {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 67rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .sandbox__carousel {
+    border-top: 0.1rem solid var(--color-detail-low-contrast);
+    border-bottom: 0.1rem solid var(--color-detail-low-contrast);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .sandbox__carousel {
+    border-radius: 0.4rem;
+    border: 0.1rem solid var(--color-detail-low-contrast);
+  }
+}
