@@ -242,6 +242,6 @@ export class CarouselComponent implements AfterViewInit {
     <h2 align="center">Thanks</h2>
   </strong>
   <p align="center">
-     Thanks to <a href="https://github.com/davidjerleke">davidjerleke</a>, <a href="https://github.com/zip-fa">zip-fa</a> and <a href="https://github.com/JeanMeche">JeanMeche</a> for for the review and advice.
+     Thanks to <a href="https://github.com/davidjerleke">davidjerleke</a>, <a href="https://github.com/zip-fa">zip-fa</a> and <a href="https://github.com/JeanMeche">JeanMeche</a> for the review and advice.
   </p>
 </div>
