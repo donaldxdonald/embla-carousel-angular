@@ -36,6 +36,7 @@
     "@angular-eslint/template-parser": "14.4.0",
     "@angular/cli": "~14.2.13",
     "@angular/compiler-cli": "^14.2.0",
+    "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@dndxdnd/eslint-config": "^1.0.2",
     "@types/jasmine": "~4.0.0",

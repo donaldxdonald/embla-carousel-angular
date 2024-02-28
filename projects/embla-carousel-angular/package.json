@@ -27,12 +27,12 @@
     "angular"
   ],
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/common": ">=14.0.0",
+    "@angular/core": ">=14.0.0"
   },
   "dependencies": {
-    "embla-carousel": "^8.0.0-rc22",
-    "embla-carousel-reactive-utils": "^8.0.0-rc22",
+    "embla-carousel": "^8.0.0",
+    "embla-carousel-reactive-utils": "^8.0.0",
     "tslib": "^2.3.0"
   }
 }
