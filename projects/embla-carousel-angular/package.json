@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-angular",
-  "version": "14.0.0",
+  "version": "14.1.0",
   "description": "Angular wrapper for Embla Carousel",
   "author": "Donald Mok <mzhlovefama@gmail.com>",
   "repository": {
@@ -26,6 +26,9 @@
     "solid",
     "angular"
   ],
+  "scripts": {
+    "release": "cd ./dist && npm publish"
+  },
   "peerDependencies": {
     "@angular/common": ">=14.0.0",
     "@angular/core": ">=14.0.0"

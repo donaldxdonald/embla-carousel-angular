@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "release": "npm run release -ws",
     "prepare": "simple-git-hooks"
   },
   "private": true,
