@@ -22,8 +22,8 @@ import {
   arePluginsEqual,
   canUseDOM,
 } from 'embla-carousel-reactive-utils'
-import { Subject, takeUntil, throttleTime } from 'rxjs'
-import { EMBLA_OPTIONS_TOKEN } from './utils'
+import { Subject, takeUntil } from 'rxjs'
+import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
 
 @Directive({
   selector: '[emblaCarousel]',
@@ -112,7 +112,10 @@ export class EmblaCarouselDirective implements AfterViewInit, OnChanges, OnDestr
     const eventsThrottler$ = new Subject<EmblaEventType>()
 
     eventsThrottler$
-      .pipe(throttleTime(this.eventsThrottleTime), takeUntil(this.destroy$))
+      .pipe(
+        throttleDistinct(this.eventsThrottleTime),
+        takeUntil(this.destroy$),
+      )
       .subscribe(eventName => {
         this.ngZone.run(() => this.emblaChange.emit(eventName))
       })
