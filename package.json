@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "release": "npm run release -ws",
+    "release:ci": "npm run build && npm run release",
     "prepare": "simple-git-hooks"
   },
   "private": true,
