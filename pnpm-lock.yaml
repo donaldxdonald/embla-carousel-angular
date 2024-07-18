@@ -127,10 +127,10 @@ importers:
         specifier: '>=14.0.0'
         version: 14.3.0(rxjs@7.5.7)(zone.js@0.11.8)
       embla-carousel:
-        specifier: ^8.0.0
+        specifier: ^8.1.6
         version: 8.1.6
       embla-carousel-reactive-utils:
-        specifier: ^8.0.0
+        specifier: ^8.1.6
         version: 8.1.6(embla-carousel@8.1.6)
       tslib:
         specifier: ^2.3.0
