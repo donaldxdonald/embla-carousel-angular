@@ -27,7 +27,6 @@ jobs:
         run: pnpm install
 
       - name: Create Release Pull Request or Publish to npm
-        if: steps.changesets.outputs.hasChangesets  == 'true'
         id: changesets
         uses: changesets/action@v1
         with:
