@@ -8,8 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "release": "npm run release -ws",
-    "release:ci": "npm run build && npm run release",
+    "release": "pnpm run build && changeset publish",
     "prepare": "simple-git-hooks"
   },
   "private": true,
@@ -52,7 +51,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "lint-staged": "^15.2.2",
-    "ng-packagr": "^14.2.0",
+    "ng-packagr": "~14.2.0",
     "simple-git-hooks": "^2.9.0",
     "typescript": "~4.7.2"
   },

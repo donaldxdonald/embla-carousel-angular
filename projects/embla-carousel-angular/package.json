@@ -26,9 +26,6 @@
     "solid",
     "angular"
   ],
-  "scripts": {
-    "release": "cd ./dist && npm publish"
-  },
   "peerDependencies": {
     "@angular/common": ">=14.0.0",
     "@angular/core": ">=14.0.0"
@@ -37,5 +34,8 @@
     "embla-carousel": "^8.0.0",
     "embla-carousel-reactive-utils": "^8.0.0",
     "tslib": "^2.3.0"
+  },
+  "publishConfig": {
+    "directory": "dist"
   }
 }
