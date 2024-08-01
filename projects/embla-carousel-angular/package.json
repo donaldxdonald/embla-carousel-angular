@@ -31,8 +31,8 @@
     "@angular/core": ">=14.0.0"
   },
   "dependencies": {
-    "embla-carousel": "^8.1.6",
-    "embla-carousel-reactive-utils": "^8.1.6",
+    "embla-carousel": "^8.1.8",
+    "embla-carousel-reactive-utils": "^8.1.8",
     "tslib": "^2.3.0"
   },
   "publishConfig": {
