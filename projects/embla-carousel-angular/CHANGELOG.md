@@ -1,5 +1,11 @@
 # embla-carousel-angular
 
+## 14.2.1
+
+### Patch Changes
+
+- [`765baff`](https://github.com/donaldxdonald/embla-carousel-angular/commit/765baff86fd598807865c9f60abfc8d8e19657a0) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - upgrade embla-carousel to v8.1.8. See [v.8.1.6 release](https://github.com/davidjerleke/embla-carousel/releases/tag/v8.1.6)
+
 ## 14.2.0
 
 ### Minor Changes
