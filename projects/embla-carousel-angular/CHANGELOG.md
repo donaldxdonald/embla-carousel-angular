@@ -1,5 +1,11 @@
 # embla-carousel-angular
 
+## 14.3.0
+
+### Minor Changes
+
+- [`3fe972f`](https://github.com/donaldxdonald/embla-carousel-angular/commit/3fe972f64e212f8a5e05bba8cade5bd0710562bd) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Upgrade embla-carousel
+
 ## 14.2.1
 
 ### Patch Changes
