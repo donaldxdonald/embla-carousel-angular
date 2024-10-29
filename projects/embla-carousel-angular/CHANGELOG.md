@@ -1,5 +1,13 @@
 # embla-carousel-angular
 
+## 17.0.0
+
+### Major Changes
+
+- [`d643a54`](https://github.com/donaldxdonald/embla-carousel-angular/commit/d643a54d788c54207b1fc50f32614000b2aa0f48) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - refactor directive with Signal apis
+
+- [`d643a54`](https://github.com/donaldxdonald/embla-carousel-angular/commit/d643a54d788c54207b1fc50f32614000b2aa0f48) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - bump the minimum required Angular version to v17
+
 ## 16.0.0
 
 ### Major Changes
