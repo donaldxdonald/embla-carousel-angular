@@ -5,6 +5,6 @@
     "declarationMap": false
   },
   "angularCompilerOptions": {
-    "compilationMode": "full"
+    "compilationMode": "partial"
   }
 }
