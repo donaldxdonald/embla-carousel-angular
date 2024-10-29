@@ -1,15 +1,14 @@
 import {
-  AfterViewInit,
+  AfterRenderPhase,
+  DestroyRef,
   Directive,
   ElementRef,
-  EventEmitter,
-  Input,
   NgZone,
-  OnChanges,
-  OnDestroy,
-  Output,
-  SimpleChanges,
+  afterNextRender,
+  effect,
   inject,
+  input,
+  output,
 } from '@angular/core'
 import EmblaCarousel, {
   EmblaCarouselType,
@@ -22,73 +21,84 @@ import {
   arePluginsEqual,
   canUseDOM,
 } from 'embla-carousel-reactive-utils'
-import { Subject, takeUntil } from 'rxjs'
+import { Subject } from 'rxjs'
 import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Directive({
   selector: '[emblaCarousel]',
   exportAs: 'emblaCarousel',
   standalone: true,
 })
-export class EmblaCarouselDirective implements AfterViewInit, OnChanges, OnDestroy {
-  private globalOptions = inject(EMBLA_OPTIONS_TOKEN)
-  private ngZone = inject(NgZone)
+export class EmblaCarouselDirective {
+  protected _globalOptions = inject(EMBLA_OPTIONS_TOKEN)
+  protected _ngZone = inject(NgZone)
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
+  protected _destroyRef = inject(DestroyRef)
 
-  @Input() options: EmblaOptionsType = {}
-  @Input() plugins: EmblaPluginType[] = []
-  @Input() subscribeToEvents: EmblaEventType[] = []
-  @Input() eventsThrottleTime = 100
+  options = input<EmblaOptionsType>({})
+  plugins = input<EmblaPluginType[]>([])
+  subscribeToEvents = input<EmblaEventType[]>([])
+  eventsThrottleTime = input(100)
 
-  @Output() readonly emblaChange = new EventEmitter<EmblaEventType>()
+  readonly emblaChange = output<EmblaEventType>()
 
-  private destroy$ = new Subject<void>()
-  private storedOptions = this.options
-  private storedPlugins = this.plugins
+  protected _destroy$ = new Subject<void>()
+  private storedOptions = this.options()
+  private storedPlugins = this.plugins()
   emblaApi?: EmblaCarouselType
 
   constructor() {
-    if (this.globalOptions) {
-      EmblaCarousel.globalOptions = this.globalOptions
+    if (this._globalOptions) {
+      EmblaCarousel.globalOptions = this._globalOptions
     }
-  }
 
-  ngAfterViewInit(): void {
-    if (!canUseDOM()) return
-    this.ngZone.runOutsideAngular(() => {
-      this.emblaApi = EmblaCarousel(
-        this._elementRef.nativeElement,
-        this.storedOptions,
-        this.storedPlugins,
-      )
+    // Init Embla Carousel
+    afterNextRender(() => {
+      if (!canUseDOM()) return
+
+      this._ngZone.runOutsideAngular(() => {
+        this.emblaApi = EmblaCarousel(
+          this._elementRef.nativeElement,
+          this.storedOptions,
+          this.storedPlugins,
+        )
+      })
+      this.listenEvents()
+    }, { phase: AfterRenderPhase.Write })
+
+    // Watch input changes
+    effect(() => {
+      const plugins = this.plugins()
+      const options = this.options()
+
+      if (options && !areOptionsEqual(this.storedOptions, options)) {
+        this.storedOptions = options
+        this.reInit()
+      }
+
+      if (plugins && !arePluginsEqual(this.storedPlugins, plugins)) {
+        this.storedPlugins = plugins
+        this.reInit()
+      }
     })
-    this.listenEvents()
-  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const { plugins, options } = changes
-
-    if (options && !areOptionsEqual(this.storedOptions, options.currentValue)) {
-      this.storedOptions = options.currentValue
-      this.reInit()
-    }
-
-    if (plugins && !arePluginsEqual(this.storedPlugins, plugins.currentValue)) {
-      this.storedPlugins = plugins.currentValue
-      this.reInit()
-    }
+    // Cleanup Embla Carousel
+    this._destroyRef.onDestroy(() => {
+      this.emblaApi?.destroy()
+    })
   }
 
   scrollTo(...args: Parameters<EmblaCarouselType['scrollTo']>): void {
-    this.ngZone.runOutsideAngular(() => this.emblaApi?.scrollTo(...args))
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollTo(...args))
   }
 
   scrollPrev(...args: Parameters<EmblaCarouselType['scrollPrev']>): void {
-    this.ngZone.runOutsideAngular(() => this.emblaApi?.scrollPrev(...args))
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollPrev(...args))
   }
 
   scrollNext(...args: Parameters<EmblaCarouselType['scrollNext']>): void {
-    this.ngZone.runOutsideAngular(() => this.emblaApi?.scrollNext(...args))
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollNext(...args))
   }
 
   reInit() {
@@ -96,7 +106,7 @@ export class EmblaCarouselDirective implements AfterViewInit, OnChanges, OnDestr
       return
     }
 
-    this.ngZone.runOutsideAngular(() => {
+    this._ngZone.runOutsideAngular(() => {
       this.emblaApi?.reInit(this.storedOptions, this.storedPlugins)
     })
   }
@@ -105,7 +115,7 @@ export class EmblaCarouselDirective implements AfterViewInit, OnChanges, OnDestr
    * `eventsThrottler$` Subject was made just because `scroll` event fires too often.
    */
   private listenEvents(): void {
-    if (this.subscribeToEvents.length === 0) {
+    if (this.subscribeToEvents().length === 0) {
       return
     }
 
@@ -113,23 +123,17 @@ export class EmblaCarouselDirective implements AfterViewInit, OnChanges, OnDestr
 
     eventsThrottler$
       .pipe(
-        throttleDistinct(this.eventsThrottleTime),
-        takeUntil(this.destroy$),
+        throttleDistinct(this.eventsThrottleTime()),
+        takeUntilDestroyed(this._destroyRef),
       )
       .subscribe(eventName => {
-        this.ngZone.run(() => this.emblaChange.emit(eventName))
+        this._ngZone.run(() => this.emblaChange.emit(eventName))
       })
 
-    this.ngZone.runOutsideAngular(() => {
-      this.subscribeToEvents.forEach(eventName => {
+    this._ngZone.runOutsideAngular(() => {
+      this.subscribeToEvents().forEach(eventName => {
         this.emblaApi!.on(eventName, () => eventsThrottler$.next(eventName))
       })
     })
-  }
-
-  ngOnDestroy(): void {
-    this.emblaApi?.destroy()
-    this.destroy$.next()
-    this.destroy$.complete()
   }
 }
