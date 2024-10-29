@@ -1,5 +1,11 @@
 # embla-carousel-angular
 
+## 16.0.0
+
+### Major Changes
+
+- [`f5951c5`](https://github.com/donaldxdonald/embla-carousel-angular/commit/f5951c56d39d4321c860fc70a09b7d29e0790085) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Bump the minimum required Angular version to v16
+
 ## 15.0.0
 
 ### Major Changes
