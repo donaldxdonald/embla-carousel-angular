@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common'
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  Input,
-  ViewChild,
+  input,
+  signal,
+  viewChild,
 } from '@angular/core'
 import {
   EmblaCarouselDirective,
@@ -21,45 +21,44 @@ import {
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CarouselComponent implements AfterViewInit {
-  @ViewChild(EmblaCarouselDirective, { static: false })
-    emblaRef!: EmblaCarouselDirective
+export class CarouselComponent {
+  emblaRef = viewChild(EmblaCarouselDirective)
 
-  @Input() options: EmblaOptionsType = {}
-  @Input() slides: number[] = []
+  options = input<EmblaOptionsType>({})
+  slides = input<number[]>([])
 
-  prevBtnEnabled = false
-  nextBtnEnabled = false
-  selectedIndex = 0
-  scrollSnaps: number[] = []
-  subscribeToEvents: EmblaEventType[] = ['init', 'reInit', 'select']
-
-  ngAfterViewInit(): void {
-    const { emblaApi } = this.emblaRef
-    if (emblaApi) {
-      this.scrollSnaps = emblaApi.scrollSnapList()
-    }
-  }
+  prevBtnEnabled = signal(false)
+  nextBtnEnabled = signal(false)
+  selectedIndex = signal(0)
+  scrollSnaps = signal<number[]>([])
+  subscribeToEvents: EmblaEventType[] = ['init', 'reInit', 'select', 'scroll']
 
   imageByIndex(index: number) {
     return `/assets/images/slide-${index}.jpg`
   }
 
   scrollPrev() {
-    this.emblaRef.scrollPrev()
+    this.emblaRef()?.scrollPrev()
   }
 
   scrollNext() {
-    this.emblaRef.scrollNext()
+    this.emblaRef()?.scrollNext()
   }
 
   scrollTo(index: number) {
-    this.emblaRef.scrollTo(index)
+    this.emblaRef()?.scrollTo(index)
   }
 
-  onSelect(emblaApi: EmblaCarouselType) {
-    this.selectedIndex = emblaApi.selectedScrollSnap()
-    this.prevBtnEnabled = emblaApi.canScrollPrev()
-    this.nextBtnEnabled = emblaApi.canScrollNext()
+  onEmblaChange(type: EmblaEventType, emblaApi: EmblaCarouselType) {
+    if (type === 'init') {
+      this.scrollSnaps.set(emblaApi.scrollSnapList())
+    }
+
+    if (type === 'select' || type === 'init' || type === 'reInit') {
+      this.selectedIndex.set(emblaApi.selectedScrollSnap())
+      this.prevBtnEnabled.set(emblaApi.canScrollPrev())
+      this.nextBtnEnabled.set(emblaApi.canScrollNext())
+      return
+    }
   }
 }

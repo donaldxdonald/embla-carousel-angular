@@ -1,5 +1,4 @@
 import {
-  AfterRenderPhase,
   DestroyRef,
   Directive,
   ElementRef,
@@ -22,8 +21,8 @@ import {
   canUseDOM,
 } from 'embla-carousel-reactive-utils'
 import { Subject } from 'rxjs'
-import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
 
 @Directive({
   selector: '[emblaCarousel]',
@@ -54,31 +53,33 @@ export class EmblaCarouselDirective {
     }
 
     // Init Embla Carousel
-    afterNextRender(() => {
-      if (!canUseDOM()) return
-
-      this._ngZone.runOutsideAngular(() => {
-        this.emblaApi = EmblaCarousel(
-          this._elementRef.nativeElement,
-          this.storedOptions,
-          this.storedPlugins,
-        )
-      })
-      this.listenEvents()
-    }, { phase: AfterRenderPhase.Write })
+    afterNextRender({
+      write: () => {
+        if (!canUseDOM()) return
+        this._ngZone.runOutsideAngular(() => {
+          this.emblaApi = EmblaCarousel(this._elementRef.nativeElement, this.storedOptions, this.storedPlugins)
+          this.listenEvents()
+        })
+      },
+    })
 
     // Watch input changes
     effect(() => {
       const plugins = this.plugins()
       const options = this.options()
+      let shouldReInit = false
 
       if (options && !areOptionsEqual(this.storedOptions, options)) {
         this.storedOptions = options
-        this.reInit()
+        shouldReInit = true
       }
 
       if (plugins && !arePluginsEqual(this.storedPlugins, plugins)) {
         this.storedPlugins = plugins
+        shouldReInit = true
+      }
+
+      if (shouldReInit) {
         this.reInit()
       }
     })
