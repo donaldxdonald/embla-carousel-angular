@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://www.embla-carousel.com/"><img width="100" height="100" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
   </a>
-  <a href="https://www.embla-carousel.com/"><img width="100" height="100" src="/src/assets/images/logos/angular_renaissance.png" alt="Embla Carousel">
+  <a href="https://angular.dev/"><img width="100" height="100" src="/src/assets/images/logos/angular_renaissance.png" alt="Angular">
   </a>
 </p>
 
