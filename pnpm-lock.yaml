@@ -115,11 +115,11 @@ importers:
         specifier: '>=18.0.0'
         version: 18.2.10(rxjs@7.8.1)(zone.js@0.14.10)
       embla-carousel:
-        specifier: ^8.3.0
-        version: 8.3.0
+        specifier: ^8.5.1
+        version: 8.5.1
       embla-carousel-reactive-utils:
-        specifier: ^8.3.0
-        version: 8.3.0(embla-carousel@8.3.0)
+        specifier: ^8.5.1
+        version: 8.5.1(embla-carousel@8.5.1)
       tslib:
         specifier: ^2.3.0
         version: 2.6.3
@@ -2962,13 +2962,13 @@ packages:
   electron-to-chromium@1.5.49:
     resolution: {integrity: sha512-ZXfs1Of8fDb6z7WEYZjXpgIRF6MEu8JdeGA0A40aZq6OQbS+eJpnnV49epZRna2DU/YsEjSQuGtQPPtvt6J65A==}
 
-  embla-carousel-reactive-utils@8.3.0:
-    resolution: {integrity: sha512-EYdhhJ302SC4Lmkx8GRsp0sjUhEN4WyFXPOk0kGu9OXZSRMmcBlRgTvHcq8eKJE1bXWBsOi1T83B+BSSVZSmwQ==}
+  embla-carousel-reactive-utils@8.5.1:
+    resolution: {integrity: sha512-n7VSoGIiiDIc4MfXF3ZRTO59KDp820QDuyBDGlt5/65+lumPHxX2JLz0EZ23hZ4eg4vZGUXwMkYv02fw2JVo/A==}
     peerDependencies:
-      embla-carousel: 8.3.0
+      embla-carousel: 8.5.1
 
-  embla-carousel@8.3.0:
-    resolution: {integrity: sha512-Ve8dhI4w28qBqR8J+aMtv7rLK89r1ZA5HocwFz6uMB/i5EiC7bGI7y+AM80yAVUJw3qqaZYK7clmZMUR8kM3UA==}
+  embla-carousel@8.5.1:
+    resolution: {integrity: sha512-JUb5+FOHobSiWQ2EJNaueCNT/cQU9L6XWBbWmorWPQT9bkbk+fhsuLr8wWrzXKagO3oWszBO7MSx+GfaRk4E6A==}
 
   emoji-regex@10.3.0:
     resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==}
@@ -8702,11 +8702,11 @@ snapshots:
 
   electron-to-chromium@1.5.49: {}
 
-  embla-carousel-reactive-utils@8.3.0(embla-carousel@8.3.0):
+  embla-carousel-reactive-utils@8.5.1(embla-carousel@8.5.1):
     dependencies:
-      embla-carousel: 8.3.0
+      embla-carousel: 8.5.1
 
-  embla-carousel@8.3.0: {}
+  embla-carousel@8.5.1: {}
 
   emoji-regex@10.3.0: {}
 
