@@ -1,5 +1,11 @@
 # embla-carousel-angular
 
+## 18.1.0
+
+### Minor Changes
+
+- [`4afa8d3`](https://github.com/donaldxdonald/embla-carousel-angular/commit/4afa8d3b1455e1920f5f8a64f52a9848ebd6ca1c) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - update `embla-carousel` from 8.3 to 8.5.1. See [changelog](https://github.com/davidjerleke/embla-carousel/releases)
+
 ## 18.0.0
 
 ### Major Changes
