@@ -1,5 +1,11 @@
 # embla-carousel-angular
 
+## 19.0.0
+
+### Major Changes
+
+- [`38669fe`](https://github.com/donaldxdonald/embla-carousel-angular/commit/38669fe11c06fd8831e6704474e5f37c94498937) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - bump the minimum required Angular version to v19
+
 ## 18.1.0
 
 ### Minor Changes
