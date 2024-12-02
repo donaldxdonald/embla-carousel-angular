@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/embla-carousel-angular" target="__blank"><img src="https://img.shields.io/npm/v/embla-carousel-angular" alt="NPM version" /></a>
-  <a href="https://github.com/donaldxdonald/embla-carousel-angular" target="__blank"><img src="https://badgen.net/bundlephobia/minzip/embla-carousel-angular" alt="Bundlephobia minzip" /></a>
+  <a href="https://bundlephobia.com/package/embla-carousel-angular" target="__blank"><img src="https://badgen.net/bundlephobia/minzip/embla-carousel-angular" alt="Bundlephobia minzip" /></a>
   <a href="https://www.npmjs.com/package/embla-carousel-angular" target="__blank"><img src="https://img.shields.io/npm/dm/embla-carousel-angular" alt="NPM downloads" /></a>
 </p>
 
