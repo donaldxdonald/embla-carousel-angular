@@ -27,7 +27,6 @@ import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
 @Directive({
   selector: '[emblaCarousel]',
   exportAs: 'emblaCarousel',
-  standalone: true,
 })
 export class EmblaCarouselDirective {
   protected _globalOptions = inject(EMBLA_OPTIONS_TOKEN)

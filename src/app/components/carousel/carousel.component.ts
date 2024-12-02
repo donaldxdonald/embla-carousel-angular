@@ -18,7 +18,6 @@ import {
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css'],
   imports: [CommonModule, EmblaCarouselDirective],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselComponent {
