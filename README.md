@@ -33,7 +33,7 @@ npm i embla-carousel-angular
 Embla Carousel provides the handy `EmblaCarouselDirective` **standalone** directive for seamless integration with Angular. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
 
 ```ts
-import { AfterViewInit, Component, ViewChild } from '@angular/core'
+import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
   EmblaCarouselType
@@ -54,17 +54,18 @@ import {
   standalone: true
 })
 export class CarouselComponent implements AfterViewInit {
-  @ViewChild(EmblaCarouselDirective) emblaRef: EmblaCarouselDirective
+  private emblaRef = viewChild<EmblaCarouselDirective>(EmblaCarouselDirective);
 
   private emblaApi?: EmblaCarouselType
   private options = { loop: false }
 
-  ngAfterViewInit() {
-    this.emblaApi = this.emblaRef.emblaApi
+  constructor() {
+    effect(() => {
+      this.emblaApi = this.emblaRef()?.emblaApi;
+    });
   }
 }
 ```
-
 
 <h2 align="center">Styling the carousel</h2>
 
@@ -85,7 +86,7 @@ The element with the classname `embla` is needed to cover the scroll overflow. I
 
 <h2 align="center">Accessing the carousel API</h2>
 
-The `emblaCarousel` directive takes the Embla Carousel [options](https://www.embla-carousel.com/api/options/) as part of its inputs. Additionally, you can access the [API](https://www.embla-carousel.com/api/) by using the `@ViewChild` decorator to access the carousel in `AfterViewInit` hook。
+The `emblaCarousel` directive takes the Embla Carousel [options](https://www.embla-carousel.com/api/options/) as part of its inputs. Additionally, you can access the [API](https://www.embla-carousel.com/api/) by using the `viewChild` signal to access the carousel in the effect.
 
 > [!WARNING]
 >  Calling the following embla APIs directly will trigger too much ChangeDetection, which will lead to serious performance issues.
@@ -104,7 +105,7 @@ Consider using the following methods which are wrapped with `ngZone.runOutsideAn
 - `EmblaCarouselDirective.scrollTo()`
 
 ```ts
-import { AfterViewInit, Component, ViewChild } from '@angular/core'
+import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
   EmblaCarouselType
@@ -124,14 +125,16 @@ import {
   imports: [EmblaCarouselDirective],
   standalone: true
 })
-export class CarouselComponent implements AfterViewInit {
-  @ViewChild(EmblaCarouselDirective) emblaRef: EmblaCarouselDirective
+export class CarouselComponent {
+  private emblaRef = viewChild<EmblaCarouselDirective>(EmblaCarouselDirective);
 
   private emblaApi?: EmblaCarouselType
   private options = { loop: false }
 
-  ngAfterViewInit() {
-    this.emblaApi = this.emblaRef.emblaApi
+  constructor() {
+    effect(() => {
+      this.emblaApi = this.emblaRef()?.emblaApi;
+    });
   }
 }
 ```
@@ -141,7 +144,7 @@ export class CarouselComponent implements AfterViewInit {
 The `emblaCarousel` directive also provides a custom event: `emblaChange` that forwards embla events, also wrapped in `ngZone.runOutsideAngular`. You need to listen by passing the specified event names into `subscribeToEvents` input on demand.
 
 ```ts
-import { AfterViewInit, Component, ViewChild } from '@angular/core'
+import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
   EmblaCarouselType,
@@ -168,11 +171,17 @@ import {
   imports: [EmblaCarouselDirective],
   standalone: true
 })
-export class CarouselComponent implements AfterViewInit {
-  @ViewChild(EmblaCarouselDirective) emblaRef: EmblaCarouselDirective
+export class CarouselComponent {
+  private emblaRef = viewChild<EmblaCarouselDirective>(EmblaCarouselDirective);
 
   private emblaApi?: EmblaCarouselType
   private options = { loop: false }
+
+  constructor() {
+    effect(() => {
+      this.emblaApi = this.emblaRef()?.emblaApi;
+    });
+  }
 
   public readonly subscribeToEvents: EmblaEventType[] = [
     'init',
@@ -191,10 +200,6 @@ export class CarouselComponent implements AfterViewInit {
   onEmblaChanged(event: EmblaEventType): void {
     console.log(`Embla event triggered: ${event}`)
   }
-
-  ngAfterViewInit() {
-    this.emblaApi = this.emblaRef.emblaApi
-  }
 }
 ```
 
@@ -209,7 +214,7 @@ npm install embla-carousel-autoplay --save
 The `emblaCarousel` directive inputs also accepts [plugins](https://www.embla-carousel.com/plugins/). Note that plugins need to be passed in an array like so:
 
 ```ts
-import { AfterViewInit, Component, ViewChild } from '@angular/core'
+import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
   EmblaCarouselType
@@ -230,15 +235,17 @@ import Autoplay from 'embla-carousel-autoplay'
   imports: [EmblaCarouselDirective],
   standalone: true
 })
-export class CarouselComponent implements AfterViewInit {
-  @ViewChild(EmblaCarouselDirective) emblaRef: EmblaCarouselDirective
+export class CarouselComponent {
+  private emblaRef = viewChild<EmblaCarouselDirective>(EmblaCarouselDirective);
 
   private emblaApi?: EmblaCarouselType
   public options = { loop: false }
   public plugins = [Autoplay()]
 
-  ngAfterViewInit() {
-    this.emblaApi = this.emblaRef.emblaApi
+  constructor() {
+    effect(() => {
+      this.emblaApi = this.emblaRef()?.emblaApi;
+    });
   }
 }
 ```
