@@ -3,6 +3,7 @@ import {
   Directive,
   ElementRef,
   NgZone,
+  Signal,
   afterNextRender,
   effect,
   inject,
@@ -29,13 +30,13 @@ import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
   exportAs: 'emblaCarousel',
 })
 export class EmblaCarouselDirective {
-  protected _globalOptions = inject(EMBLA_OPTIONS_TOKEN)
+  protected _globalOptions: EmblaOptionsType | undefined = inject(EMBLA_OPTIONS_TOKEN)
   protected _ngZone = inject(NgZone)
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   protected _destroyRef = inject(DestroyRef)
 
-  options = input<EmblaOptionsType>({})
-  plugins = input<EmblaPluginType[]>([])
+  options: Signal<EmblaOptionsType> = input<EmblaOptionsType>({})
+  plugins: Signal<EmblaPluginType[]> = input<EmblaPluginType[]>([])
   subscribeToEvents = input<EmblaEventType[]>([])
   eventsThrottleTime = input(100)
 
