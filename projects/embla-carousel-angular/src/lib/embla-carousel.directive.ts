@@ -2,8 +2,8 @@ import {
   DestroyRef,
   Directive,
   ElementRef,
+  InputSignal,
   NgZone,
-  Signal,
   afterNextRender,
   effect,
   inject,
@@ -35,8 +35,8 @@ export class EmblaCarouselDirective {
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   protected _destroyRef = inject(DestroyRef)
 
-  options: Signal<EmblaOptionsType> = input<EmblaOptionsType>({})
-  plugins: Signal<EmblaPluginType[]> = input<EmblaPluginType[]>([])
+  options: InputSignal<EmblaOptionsType> = input<EmblaOptionsType>({})
+  plugins: InputSignal<EmblaPluginType[]> = input<EmblaPluginType[]>([])
   subscribeToEvents = input<EmblaEventType[]>([])
   eventsThrottleTime = input(100)
 
