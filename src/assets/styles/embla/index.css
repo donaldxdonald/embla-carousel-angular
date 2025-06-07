@@ -51,11 +51,7 @@
 .embla__slide__number > span {
   color: rgb(47, 112, 193);
 
-  background-image: linear-gradient(
-    45deg,
-    rgb(47, 112, 193),
-    rgb(116, 97, 195)
-  );
+  background-image: linear-gradient(45deg, rgb(47, 112, 193), rgb(116, 97, 195));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

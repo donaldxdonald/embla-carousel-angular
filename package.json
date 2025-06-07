@@ -37,7 +37,7 @@
     "@changesets/cli": "^2.29.4",
     "@dndxdnd/eslint-config": "^2.10.0",
     "@types/jasmine": "~4.0.0",
-    "angular-eslint": "^19.6.0",
+    "angular-eslint": "^20.0.0",
     "eslint": "^9.27.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
@@ -59,6 +59,14 @@
   "pnpm": {
     "overrides": {
       "eslint-plugin-import": "npm:eslint-plugin-import-x@^4"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "lmdb",
+      "msgpackr-extract",
+      "simple-git-hooks",
+      "unrs-resolver"
+    ]
   }
 }
