@@ -2,7 +2,7 @@ import { InjectionToken, Provider } from '@angular/core'
 import { EmblaOptionsType } from 'embla-carousel'
 import { Observable, filter, map, scan } from 'rxjs'
 
-export const EMBLA_OPTIONS_TOKEN = new InjectionToken<
+export const EMBLA_OPTIONS_TOKEN: InjectionToken<EmblaOptionsType | undefined> = new InjectionToken<
 EmblaOptionsType | undefined
 >('embla global options', {
   factory: () => undefined,
