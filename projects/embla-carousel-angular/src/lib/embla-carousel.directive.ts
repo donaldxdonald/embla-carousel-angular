@@ -42,7 +42,6 @@ export class EmblaCarouselDirective {
 
   readonly emblaChange = output<EmblaEventType>()
 
-  protected _destroy$ = new Subject<void>()
   private storedOptions = this.options()
   private storedPlugins = this.plugins()
   emblaApi?: EmblaCarouselType
