@@ -8,6 +8,10 @@ EmblaOptionsType | undefined
   factory: () => undefined,
 })
 
+export function canUseDOM(): boolean {
+  return typeof window !== 'undefined' && typeof document !== 'undefined'
+}
+
 export function provideEmblaGlobalOptions(
   options?: EmblaOptionsType,
 ): Provider[] {

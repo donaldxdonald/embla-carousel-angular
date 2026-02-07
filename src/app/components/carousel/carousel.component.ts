@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common'
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  effect,
   input,
   signal,
   viewChild,
@@ -29,34 +31,40 @@ export class CarouselComponent {
   prevBtnEnabled = signal(false)
   nextBtnEnabled = signal(false)
   selectedIndex = signal(0)
-  scrollSnaps = signal<number[]>([])
-  subscribeToEvents: EmblaEventType[] = ['init', 'reInit', 'select', 'scroll']
+  emblaApi = computed(() => this.emblaRef()?.emblaApiSignal())
+  scrollSnaps = computed(() => this.emblaApi()?.snapList())
+  subscribeToEvents: EmblaEventType[] = ['reinit', 'select', 'scroll']
+
+  constructor() {
+    effect(() => {
+      const embla = this.emblaApi()
+      if (embla) {
+        this.onEmblaChange('reinit', embla)
+      }
+    })
+  }
 
   imageByIndex(index: number) {
     return `/assets/images/slide-${index}.jpg`
   }
 
-  scrollPrev() {
-    this.emblaRef()?.scrollPrev()
+  goToPrev() {
+    this.emblaRef()?.goToPrev()
   }
 
-  scrollNext() {
-    this.emblaRef()?.scrollNext()
+  goToNext() {
+    this.emblaRef()?.goToNext()
   }
 
-  scrollTo(index: number) {
-    this.emblaRef()?.scrollTo(index)
+  goTo(index: number) {
+    this.emblaRef()?.goTo(index)
   }
 
   onEmblaChange(type: EmblaEventType, emblaApi: EmblaCarouselType) {
-    if (type === 'init') {
-      this.scrollSnaps.set(emblaApi.scrollSnapList())
-    }
-
-    if (type === 'select' || type === 'init' || type === 'reInit') {
-      this.selectedIndex.set(emblaApi.selectedScrollSnap())
-      this.prevBtnEnabled.set(emblaApi.canScrollPrev())
-      this.nextBtnEnabled.set(emblaApi.canScrollNext())
+    if (type === 'select' || type === 'reinit') {
+      this.selectedIndex.set(emblaApi.selectedSnap())
+      this.prevBtnEnabled.set(emblaApi.canGoToPrev())
+      this.nextBtnEnabled.set(emblaApi.canGoToNext())
       return
     }
   }

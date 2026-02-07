@@ -15,22 +15,41 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
 
+      - name: Resolve publish command
+        id: publish-cmd
+        run: |
+          PRE_TAG="$(node -e "const fs=require('node:fs'); try { const pre=JSON.parse(fs.readFileSync('.changeset/pre.json','utf8')); if (pre.mode === 'pre') process.stdout.write(pre.tag || 'next'); } catch {}")"
+
+          if [ -n "$PRE_TAG" ]; then
+            {
+              echo "command<<EOF"
+              echo "pnpm run build && changeset publish --tag $PRE_TAG"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            {
+              echo "command<<EOF"
+              echo "pnpm run release"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm run release
+          publish: ${{ steps.publish-cmd.outputs.command }}
           commit: "chore(release): publish"
           title: "chore(release): publish"
         env:
