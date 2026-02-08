@@ -1,5 +1,10 @@
 name: Publish
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+  pull-requests: write
+
 on:
   push:
     branches:
