@@ -11,7 +11,6 @@
     "release": "pnpm run build && changeset publish",
     "release:pre:enter": "changeset pre enter next",
     "release:pre:exit": "changeset pre exit",
-    "release:pre": "pnpm run build && changeset version && changeset publish --tag next",
     "changeset": "changeset",
     "prepare": "simple-git-hooks"
   },

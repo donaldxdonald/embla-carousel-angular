@@ -4,8 +4,7 @@
   "description": "Angular wrapper for Embla Carousel",
   "author": "Donald Mok <mzhlovefama@gmail.com>",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/donaldxdonald/embla-carousel-angular"
+    "url": "https://github.com/donaldxdonald/embla-carousel-angular"
   },
   "bugs": {
     "url": "https://github.com/donaldxdonald/embla-carousel-angular/issues"
