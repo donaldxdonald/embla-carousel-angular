@@ -4,11 +4,13 @@ import {
   ElementRef,
   InputSignal,
   NgZone,
+  Signal,
   afterNextRender,
   effect,
   inject,
   input,
   output,
+  signal,
 } from '@angular/core'
 import EmblaCarousel, {
   EmblaCarouselType,
@@ -19,11 +21,10 @@ import EmblaCarousel, {
 import {
   areOptionsEqual,
   arePluginsEqual,
-  canUseDOM,
 } from 'embla-carousel-reactive-utils'
 import { Subject } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
+import { canUseDOM, EMBLA_OPTIONS_TOKEN, throttleDistinct } from './utils'
 
 @Directive({
   selector: '[emblaCarousel]',
@@ -35,16 +36,21 @@ export class EmblaCarouselDirective {
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   protected _destroyRef = inject(DestroyRef)
 
-  options: InputSignal<EmblaOptionsType> = input<EmblaOptionsType>({})
-  plugins: InputSignal<EmblaPluginType[]> = input<EmblaPluginType[]>([])
-  subscribeToEvents = input<EmblaEventType[]>([])
-  eventsThrottleTime = input(100)
+  readonly options: InputSignal<EmblaOptionsType> = input<EmblaOptionsType>({})
+  readonly plugins: InputSignal<EmblaPluginType[]> = input<EmblaPluginType[]>([])
+  readonly subscribeToEvents = input<EmblaEventType[]>([])
+  readonly eventsThrottleTime = input(100)
 
   readonly emblaChange = output<EmblaEventType>()
 
   private storedOptions = this.options()
   private storedPlugins = this.plugins()
-  emblaApi?: EmblaCarouselType
+  private readonly _emblaApiSignal = signal<EmblaCarouselType | null>(null)
+  readonly emblaApiSignal: Signal<EmblaCarouselType | null> = this._emblaApiSignal.asReadonly()
+
+  get emblaApi() {
+    return this.emblaApiSignal()
+  }
 
   constructor() {
     if (this._globalOptions) {
@@ -56,7 +62,7 @@ export class EmblaCarouselDirective {
       write: () => {
         if (!canUseDOM()) return
         this._ngZone.runOutsideAngular(() => {
-          this.emblaApi = EmblaCarousel(this._elementRef.nativeElement, this.storedOptions, this.storedPlugins)
+          this._emblaApiSignal.set(EmblaCarousel(this._elementRef.nativeElement, this.storedOptions, this.storedPlugins))
           this.listenEvents()
         })
       },
@@ -86,19 +92,20 @@ export class EmblaCarouselDirective {
     // Cleanup Embla Carousel
     this._destroyRef.onDestroy(() => {
       this.emblaApi?.destroy()
+      this._emblaApiSignal.set(null)
     })
   }
 
-  scrollTo(...args: Parameters<EmblaCarouselType['scrollTo']>): void {
-    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollTo(...args))
+  goTo(...args: Parameters<EmblaCarouselType['goTo']>): void {
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.goTo(...args))
   }
 
-  scrollPrev(...args: Parameters<EmblaCarouselType['scrollPrev']>): void {
-    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollPrev(...args))
+  goToPrev(...args: Parameters<EmblaCarouselType['goToPrev']>): void {
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.goToPrev(...args))
   }
 
-  scrollNext(...args: Parameters<EmblaCarouselType['scrollNext']>): void {
-    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollNext(...args))
+  goToNext(...args: Parameters<EmblaCarouselType['goToNext']>): void {
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.goToNext(...args))
   }
 
   reInit() {

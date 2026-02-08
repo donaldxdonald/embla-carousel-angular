@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "embla-carousel-angular": "21.0.0"
+  },
+  "changesets": []
+}

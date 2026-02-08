@@ -16,8 +16,16 @@
 <h2 align="center">Installation</h2>
 
 ```shell
-npm i embla-carousel-angular
+npm i embla-carousel embla-carousel-angular
 ```
+
+<br>
+
+<h2 align="center">Breaking changes in Embla v9</h2>
+
+- `scrollTo`, `scrollPrev`, `scrollNext` were renamed to `goTo`, `goToPrev`, `goToNext`.
+- `EmblaEventType` values are now lowercase (`pointerdown`, `slidesinview`, `reinit`, ...).
+- `init` event is removed.
 
 <br>
 
@@ -89,15 +97,15 @@ The `emblaCarousel` directive takes the Embla Carousel [options](https://www.emb
 <br />
 
 - `emblaApi.on()`
-- `emblaApi.scrollNext()`
-- `emblaApi.scrollPrev()`
-- `emblaApi.scrollTo()`
+- `emblaApi.goToNext()`
+- `emblaApi.goToPrev()`
+- `emblaApi.goTo()`
 
 Consider using the following methods which are wrapped with `ngZone.runOutsideAngular()`:
 
-- `EmblaCarouselDirective.scrollPrev()`
-- `EmblaCarouselDirective.scrollNext()`
-- `EmblaCarouselDirective.scrollTo()`
+- `EmblaCarouselDirective.goToPrev()`
+- `EmblaCarouselDirective.goToNext()`
+- `EmblaCarouselDirective.goTo()`
 
 ```ts
 import { Component, effect, viewChild } from '@angular/core'
@@ -179,24 +187,32 @@ export class CarouselComponent {
   }
   
   public readonly subscribeToEvents: EmblaEventType[] = [
-    'init',
-    'pointerDown',
-    'pointerUp',
-    'slidesChanged',
-    'slidesInView',
+    'pointerdown',
+    'pointerup',
+    'slideschanged',
+    'slidesinview',
     'select',
     'settle',
     'destroy',
-    'reInit',
+    'reinit',
     'resize',
     'scroll'
   ]
 
-  onEmblaChanged(event: EmblaEventType): void {
+  onEmblaChange(event: EmblaEventType): void {
     console.log(`Embla event triggered: ${event}`)
   }
 }
 ```
+
+<h2 align="center">SSR guidance</h2>
+
+When using Angular Universal / SSR:
+
+- The directive only creates Embla in the browser, so `emblaApi` is `undefined` on the server.
+- Guard API calls with optional chaining or browser-only effects.
+- Use Embla v9 `options.ssr` to pre-compute snap positions for better first paint stability.
+- After client init, `emblaApi?.ssrStyles(containerSelector, slideSelector)` can be used to generate inline styles for SSR/hydration workflows if you need deterministic server/client layout.
 
 <h2 align="center">Adding plugins</h2>
 
