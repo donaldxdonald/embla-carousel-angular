@@ -4,14 +4,6 @@
 
 ### Major Changes
 
-- [#22](https://github.com/donaldxdonald/embla-carousel-angular/pull/22) [`9ffc19f`](https://github.com/donaldxdonald/embla-carousel-angular/commit/9ffc19f28d4ee7947041bbe2780fc96fe59654ae) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Migrate the Angular wrapper to Embla Carousel `v9.0.0`.
-
-  Breaking changes:
-
-  - Rename wrapper methods `scrollTo`, `scrollPrev`, `scrollNext` to `goTo`, `goToPrev`, `goToNext`.
-  - Align event names with Embla v9 lowercase event model and remove `init` usage.
-  - Move `embla-carousel` to `peerDependencies`.
-
 - [#24](https://github.com/donaldxdonald/embla-carousel-angular/pull/24) [`90a5bb7`](https://github.com/donaldxdonald/embla-carousel-angular/commit/90a5bb7f2b775c2b2d1e8815402dabedbe2b088f) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Update to Angular v22.
 
   Breaking changes:
@@ -23,17 +15,6 @@
 
   - Add wrapper methods `goTo`, `goToPrev`, `goToNext` for the future Embla Carousel v9.
 
-## 22.0.0-next.0
-
-### Major Changes
-
-- [#22](https://github.com/donaldxdonald/embla-carousel-angular/pull/22) [`9ffc19f`](https://github.com/donaldxdonald/embla-carousel-angular/commit/9ffc19f28d4ee7947041bbe2780fc96fe59654ae) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Migrate the Angular wrapper to Embla Carousel `v9.0.0`.
-
-  Breaking changes:
-
-  - Rename wrapper methods `scrollTo`, `scrollPrev`, `scrollNext` to `goTo`, `goToPrev`, `goToNext`.
-  - Align event names with Embla v9 lowercase event model and remove `init` usage.
-  - Move `embla-carousel` to `peerDependencies`.
 
 ## 21.0.0
 
