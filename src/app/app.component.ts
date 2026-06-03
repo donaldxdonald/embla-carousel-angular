@@ -1,14 +1,12 @@
 import { Component } from '@angular/core'
-import { EmblaOptionsType } from 'embla-carousel-angular'
+import { EmblaOptionsType } from 'embla-carousel'
 import { CarouselComponent } from './components/carousel/carousel.component'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [
-    CarouselComponent,
-  ],
+  imports: [CarouselComponent],
 })
 export class AppComponent {
   OPTIONS: EmblaOptionsType = {}

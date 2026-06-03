@@ -8,11 +8,9 @@ import {
   signal,
   viewChild,
 } from '@angular/core'
+import { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from 'embla-carousel'
 import {
   EmblaCarouselDirective,
-  EmblaCarouselType,
-  EmblaEventType,
-  EmblaOptionsType,
 } from 'embla-carousel-angular'
 
 @Component({
@@ -32,14 +30,14 @@ export class CarouselComponent {
   nextBtnEnabled = signal(false)
   selectedIndex = signal(0)
   emblaApi = computed(() => this.emblaRef()?.emblaApiSignal())
-  scrollSnaps = computed(() => this.emblaApi()?.snapList())
-  subscribeToEvents: EmblaEventType[] = ['reinit', 'select', 'scroll']
+  scrollSnaps = computed(() => this.emblaApi()?.scrollSnapList())
+  subscribeToEvents: EmblaEventType[] = ['reInit', 'select']
 
   constructor() {
     effect(() => {
       const embla = this.emblaApi()
       if (embla) {
-        this.onEmblaChange('reinit', embla)
+        this.onEmblaChange('reInit', embla)
       }
     })
   }
@@ -61,10 +59,10 @@ export class CarouselComponent {
   }
 
   onEmblaChange(type: EmblaEventType, emblaApi: EmblaCarouselType) {
-    if (type === 'select' || type === 'reinit') {
-      this.selectedIndex.set(emblaApi.selectedSnap())
-      this.prevBtnEnabled.set(emblaApi.canGoToPrev())
-      this.nextBtnEnabled.set(emblaApi.canGoToNext())
+    if (type === 'select' || type === 'reInit') {
+      this.selectedIndex.set(emblaApi.selectedScrollSnap())
+      this.prevBtnEnabled.set(emblaApi.canScrollPrev())
+      this.nextBtnEnabled.set(emblaApi.canScrollNext())
       return
     }
   }
