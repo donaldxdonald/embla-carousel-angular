@@ -4,5 +4,7 @@
   "initialVersions": {
     "embla-carousel-angular": "22.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "sweet-emus-double"
+  ]
 }
