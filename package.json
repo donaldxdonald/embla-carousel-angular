@@ -25,8 +25,8 @@
     "@angular/platform-browser": "^22.0.0",
     "@angular/platform-browser-dynamic": "^22.0.0",
     "@angular/router": "^22.0.0",
-    "embla-carousel": "8.6.0",
-    "embla-carousel-reactive-utils": "8.6.0",
+    "embla-carousel": "^9.0.0-rc02",
+    "embla-carousel-reactive-utils": "^9.0.0-rc02",
     "rxjs": "~7.8.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
