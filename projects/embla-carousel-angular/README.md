@@ -22,6 +22,14 @@ npm i embla-carousel embla-carousel-angular embla-carousel-reactive-utils
 <br>
 
 
+<h2 align="center">Breaking changes in Embla v9</h2>
+
+- `scrollTo`, `scrollPrev`, `scrollNext` were renamed to `goTo`, `goToPrev`, `goToNext`.
+- `EmblaEventType` values are now lowercase (`pointerdown`, `slidesinview`, `reinit`, ...).
+- `init` event is removed.
+
+<br>
+
 
 <h2 align="center">The component structure</h2>
 
