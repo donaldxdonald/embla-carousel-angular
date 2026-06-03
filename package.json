@@ -15,9 +15,7 @@
     "prepare": "simple-git-hooks"
   },
   "private": true,
-  "workspaces": [
-    "projects/*"
-  ],
+  "packageManager": "pnpm@11.5.1",
   "dependencies": {
     "@angular/animations": "^21.0.1",
     "@angular/common": "^21.0.1",
@@ -59,18 +57,5 @@
   },
   "lint-staged": {
     "*.ts": "eslint"
-  },
-  "pnpm": {
-    "overrides": {
-      "eslint-plugin-import": "npm:eslint-plugin-import-x@^4"
-    },
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild",
-      "lmdb",
-      "msgpackr-extract",
-      "simple-git-hooks",
-      "unrs-resolver"
-    ]
   }
 }

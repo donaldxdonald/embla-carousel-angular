@@ -1,2 +1,9 @@
 packages:
   - projects/*
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
+  simple-git-hooks: true
+  unrs-resolver: true
