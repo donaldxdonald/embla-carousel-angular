@@ -96,16 +96,37 @@ export class EmblaCarouselDirective {
     })
   }
 
-  goTo(...args: Parameters<EmblaCarouselType['goTo']>): void {
-    this._ngZone.runOutsideAngular(() => this.emblaApi?.goTo(...args))
+  goTo(...args: Parameters<EmblaCarouselType['scrollTo']>): void {
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollTo(...args))
   }
 
-  goToPrev(...args: Parameters<EmblaCarouselType['goToPrev']>): void {
-    this._ngZone.runOutsideAngular(() => this.emblaApi?.goToPrev(...args))
+  goToPrev(...args: Parameters<EmblaCarouselType['scrollPrev']>): void {
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollPrev(...args))
   }
 
-  goToNext(...args: Parameters<EmblaCarouselType['goToNext']>): void {
-    this._ngZone.runOutsideAngular(() => this.emblaApi?.goToNext(...args))
+  goToNext(...args: Parameters<EmblaCarouselType['scrollNext']>): void {
+    this._ngZone.runOutsideAngular(() => this.emblaApi?.scrollNext(...args))
+  }
+
+  /**
+   * @deprecated Use `goTo` instead
+   */
+  scrollTo(...args: Parameters<EmblaCarouselType['scrollTo']>): void {
+    this.goTo(...args)
+  }
+
+  /**
+   * @deprecated Use `goToPrev` instead
+   */
+  scrollPrev(...args: Parameters<EmblaCarouselType['scrollPrev']>): void {
+    this.goToPrev(...args)
+  }
+
+  /**
+   * @deprecated Use `goToNext` instead
+   */
+  scrollNext(...args: Parameters<EmblaCarouselType['scrollNext']>): void {
+    this.goToNext(...args)
   }
 
   reInit() {

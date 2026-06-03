@@ -16,18 +16,11 @@
 <h2 align="center">Installation</h2>
 
 ```shell
-npm i embla-carousel embla-carousel-angular
+npm i embla-carousel embla-carousel-angular embla-carousel-reactive-utils
 ```
 
 <br>
 
-<h2 align="center">Breaking changes in Embla v9</h2>
-
-- `scrollTo`, `scrollPrev`, `scrollNext` were renamed to `goTo`, `goToPrev`, `goToNext`.
-- `EmblaEventType` values are now lowercase (`pointerdown`, `slidesinview`, `reinit`, ...).
-- `init` event is removed.
-
-<br>
 
 
 <h2 align="center">The component structure</h2>
@@ -38,8 +31,8 @@ Embla Carousel provides the handy `EmblaCarouselDirective` **standalone** direct
 import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
-  EmblaCarouselType
 } from 'embla-carousel-angular'
+import { EmblaCarouselType } from 'embla-carousel'
 
 @Component({
   selector: 'app-carousel',
@@ -111,8 +104,8 @@ Consider using the following methods which are wrapped with `ngZone.runOutsideAn
 import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
-  EmblaCarouselType
 } from 'embla-carousel-angular'
+import { EmblaCarouselType } from 'embla-carousel'
 
 @Component({
   selector: 'app-carousel',
@@ -150,9 +143,8 @@ The `emblaCarousel` directive also provides a custom event: `emblaChange` that f
 import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
-  EmblaCarouselType,
-  EmblaEventType
 } from 'embla-carousel-angular'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
 @Component({
   selector: 'app-carousel',
@@ -228,8 +220,8 @@ The `emblaCarousel` directive inputs also accepts [plugins](https://www.embla-ca
 import { Component, effect, viewChild } from '@angular/core'
 import {
   EmblaCarouselDirective,
-  EmblaCarouselType
 } from 'embla-carousel-angular'
+import { EmblaCarouselType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
 @Component({
