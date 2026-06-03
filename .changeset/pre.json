@@ -5,6 +5,7 @@
     "embla-carousel-angular": "21.0.0"
   },
   "changesets": [
-    "busy-tires-learn"
+    "busy-tires-learn",
+    "plenty-kiwis-run"
   ]
 }

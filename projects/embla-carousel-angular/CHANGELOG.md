@@ -1,5 +1,20 @@
 # embla-carousel-angular
 
+## 22.0.0-next.1
+
+### Major Changes
+
+- [#24](https://github.com/donaldxdonald/embla-carousel-angular/pull/24) [`90a5bb7`](https://github.com/donaldxdonald/embla-carousel-angular/commit/90a5bb7f2b775c2b2d1e8815402dabedbe2b088f) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Update to Angular v22.
+
+  Breaking changes:
+
+  - Move `embla-carousel` and `embla-carousel-reactive-utils` to `peerDependencies`.
+  - Need to import `EmblaCarouselType` from `embla-carousel` instead of `embla-carousel-angular`.
+
+  Features:
+
+  - Add wrapper methods `goTo`, `goToPrev`, `goToNext` for the future Embla Carousel v9.
+
 ## 22.0.0-next.0
 
 ### Major Changes
