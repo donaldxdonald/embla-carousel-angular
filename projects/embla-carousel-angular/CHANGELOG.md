@@ -1,5 +1,11 @@
 # embla-carousel-angular
 
+## 22.1.0-next.0
+
+### Minor Changes
+
+- [#27](https://github.com/donaldxdonald/embla-carousel-angular/pull/27) [`8798982`](https://github.com/donaldxdonald/embla-carousel-angular/commit/8798982298b855ca740639e72519db04c1afa594) Thanks [@donaldxdonald](https://github.com/donaldxdonald)! - Support Embla Carousel v9
+
 ## 22.0.0
 
 ### Major Changes
@@ -14,7 +20,6 @@
   Features:
 
   - Add wrapper methods `goTo`, `goToPrev`, `goToNext` for the future Embla Carousel v9.
-
 
 ## 21.0.0
 
